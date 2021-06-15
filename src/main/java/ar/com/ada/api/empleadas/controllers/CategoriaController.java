@@ -14,7 +14,7 @@ import ar.com.ada.api.empleadas.services.*;
 public class CategoriaController {
 
     @Autowired
-    private CategoriaService service;
+    CategoriaService service;
 
     @PostMapping ("/categorias") // Ningún web method devuelve void
     public ResponseEntity<?> crearCategoria(@RequestBody Categoria categoria){
@@ -22,7 +22,7 @@ public class CategoriaController {
         GenericResponse respuesta = new GenericResponse();
         service.crearCategoria(categoria);
         respuesta.isOk = true;
-        respuesta.id = categoria.getCategoriaId()
+        respuesta.id = categoria.getCategoriaId();
         respuesta.message = "La categoria fue creada con exito";
 
         return ResponseEntity.ok(respuesta);
