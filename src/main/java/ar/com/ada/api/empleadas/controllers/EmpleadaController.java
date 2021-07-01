@@ -34,11 +34,11 @@ public class EmpleadaController {
     public ResponseEntity<?> crearEmpleada(@RequestBody InfoEmpleadaNueva empleadaInfo) {
         GenericResponse respuesta = new GenericResponse();
 
-        Empleada empleada = new Empleada();
-        empleada.setNombre(empleadaInfo.nombre);
-        empleada.setEdad(empleadaInfo.edad);
-        empleada.setSueldo(empleadaInfo.sueldo);
-        empleada.setFechaAlta(new Date());
+        Empleada empleada = new Empleada(empleadaInfo.nombre, empleadaInfo.edad, empleadaInfo.sueldo, new Date());
+        //empleada.setNombre(empleadaInfo.nombre);
+        //empleada.setEdad(empleadaInfo.edad);
+        //empleada.setSueldo(empleadaInfo.sueldo);
+        //empleada.setFechaAlta(new Date());
         
         Categoria categoria = categoriaService.buscarCategoria(empleadaInfo.categoriaId);
         empleada.setCategoria(categoria);
@@ -54,6 +54,9 @@ public class EmpleadaController {
     @GetMapping("/empleados/{id}")
     public ResponseEntity<Empleada> getEmpleadaPorId(@PathVariable Integer id){
         Empleada empleada = service.buscarEmpleada(id);
+        if (empleada == null){
+            return ResponseEntity.notFound().build();
+        }
 
         return ResponseEntity.ok(empleada);
     }
