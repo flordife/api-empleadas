@@ -2,6 +2,7 @@ package ar.com.ada.api.empleadas.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Random;
 
 import javax.persistence.*;
 
@@ -135,5 +136,18 @@ public class Empleada {
             return status;
     }
     }
+
+    
+    public BigDecimal obtenerVentasAnuales() {
+        Random randomGenerator = new Random();
+
+        // Genero un numero rando hasta 10000
+        double venta = randomGenerator.nextDouble() * 10000 + 1;
+        // redondeo en 2 decimales el random truncando
+        venta = ((long) (venta * 100)) / 100d;
+
+        return new BigDecimal(venta);
+    }
+
 }
 
